@@ -4,12 +4,12 @@ endif
 
 include $(TOPDIR)/Config.mk
 
-TARGET	:= built-in.o
+TARGET	:= libmy.a
 SUBDIRS	:=
-OBJS	:= $(patsubst %.S, %.o, $(wildcard *.S))
-OBJS	+= $(patsubst %.c, %.o, $(wildcard *.c))
+OBJS	:= $(patsubst %.c, %.o, $(wildcard *.c))
 
-all: compile $(OBJS)
-	$(LD) -r $(addsuffix /$(TARGET),$(SUBDIRS)) $(OBJS) -o $(TARGET)
+TARGET :compile $(OBJS)
+	$(AR) $(AR_MAKE_FLAGS) $(TARGET) $(OBJS)
+
 
 include $(TOPDIR)/Rules.mk 

@@ -1,3 +1,4 @@
+
 typedef union json_value_value {
     char        *string;
     double       number;

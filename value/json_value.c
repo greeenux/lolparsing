@@ -15,9 +15,8 @@
 
 #undef malloc
 #undef free
-
 static JSON_Malloc_Function parson_malloc = malloc;
-static JSON_Free_Function parson_free = free;
+
 /* JSON Value */
  JSON_Value * json_value_init_string_no_copy(char *string);
 

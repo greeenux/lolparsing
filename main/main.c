@@ -4,6 +4,7 @@
 #include <math.h>
 #include "parson.h"   
 #include "type_definitions.h"
+#define _CRT_SECURE_NO_WARNINGS
 
 void print_commits_info(const char *username); 
 int main()
@@ -13,7 +14,7 @@ int main()
 	char user[150]="";
 	char *p_temp;
 	p_temp=temp;
-    	fgets(temp,100,stdin);
+    	p_temp=fgets(temp,100,stdin);
 	/* if you have space in your string then change space to "%20"*/
 	for(i=0;i<100;i++)
 	{
@@ -53,12 +54,13 @@ void print_commits_info(const char *username) {
     	int i;
     	char cleanup_command[256];
     	char output_filename[] = "lol.json";
-    	char api_key[] = "RGAPI-08847a87-86ab-4c5d-a79f-d0e517499f29";
+    	char api_key[] = "RGAPI-e063a979-d914-490f-965e-4ec648df1fe4";
     
 	sprintf(curl_command,
         "curl -s \"https://kr.api.riotgames.com/lol/summoner/v3/summoners/by-name/%s/?api_key=%s\">%s",
         username, api_key, output_filename);
-    	system(curl_command);
+    	if(system(curl_command)==-1)
+			printf("error");
     	/* parsing json and validating output */
     	root_value = json_parse_file(output_filename);
     	rootObjects = json_value_get_object(root_value);
@@ -70,7 +72,8 @@ void print_commits_info(const char *username) {
 	id=json_object_get_number(rootObjects,"id");
 	sprintf(curl_command,"curl -s \"https://kr.api.riotgames.com/lol/league/v3/leagues/by-summoner/%.0lf/?api_key=%s\">%s",
         id,api_key,output_filename);
-        system(curl_command);
+        if(system(curl_command)==-1)
+		printf("error");
         root_value=json_parse_file(output_filename);
         arrays=json_value_get_array(root_value);
         root_value=json_array_get_value(arrays,0);
@@ -81,13 +84,14 @@ void print_commits_info(const char *username) {
 	sprintf(curl_command,"curl -s \"https://kr.api.riotgames.com/lol/match/v3/matchlists/by-account/%.0lf/?api_key=%s\">%s",
 	accountId,api_key,output_filename);
 	sprintf(cleanup_command,"rm -f %s", output_filename);
-    	system(curl_command);
+    	if(system(curl_command)==-1)
+			printf("error");
     	root_value = json_parse_file(output_filename);
     	rootObjects = json_value_get_object(root_value);
     	/*output*/
     	arrays =json_object_get_array(rootObjects,"matches");
     	printf("%-10.10s %-10.10s %s\n", "platformId", "season", "line");
-	for (i = 0; i < json_array_get_count(arrays)&&i<30; i++) 
+	for (i = 0; i <(int) json_array_get_count(arrays)&&i<30; i++) 
 	{
         temp = json_array_get_object(arrays, i);
         printf("%5s %10.0f %10s\n",
@@ -99,5 +103,6 @@ void print_commits_info(const char *username) {
 
    	/* cleanup code */
    	json_value_free(root_value);
-   	system(cleanup_command);
+   	if(system(cleanup_command)==-1)
+			printf("error");
 }
