@@ -4,7 +4,9 @@ TARGET	:= lol		#software that we want to make  #우리가 만들고 싶은 프�
 TOPDIR	:= $(shell /bin/pwd)
 #↑↑↑↑ The only way to use the results of a shell command as a macro  #쉘명령어를 매크로로 정의한느 유일한방법
 SUBDIRS := object array value serialization parser various	#SUBDIRS that we will visit     #반복문을 돌기위한 서브디렉토리
-include $(TOPDIR)/Config.mk	##read $(TOPDIR)/Config.mk file  #Config.mk파일 읽어들이고 포함하라는 의미
+
+include $(TOPDIR)/Config.mk	
+##↑↑↑read $(TOPDIR)/Config.mk file  #Config.mk파일 읽어들이고 포함하라는 의미
 
 
 all: test_file.o libparsing.a	
