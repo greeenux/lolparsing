@@ -8,7 +8,7 @@ TARGET	:= libmy.a
 SUBDIRS	:=
 OBJS	:= $(patsubst %.c, %.o, $(wildcard *.c))
 
-TARGET :compile $(OBJS)
+TARGET :$(OBJS)
 	$(AR) $(AR_MAKE_FLAGS) $(TARGET) $(OBJS)
 
 
