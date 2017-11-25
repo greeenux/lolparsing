@@ -6,7 +6,7 @@
 #include "type_definitions.h"
 #define _CRT_SECURE_NO_WARNINGS
 
-void print_commits_info(const char *username); 
+void print_commits_info(char *username); 
 int main()
 {
 	int i,count=0;
@@ -43,7 +43,7 @@ int main()
     	print_commits_info(user);
     	return 0;
 }
-void print_commits_info(const char *username) {
+void print_commits_info(char *username) {
     	JSON_Value *root_value;
     	JSON_Array *arrays;
     	JSON_Object *rootObjects;
@@ -54,7 +54,7 @@ void print_commits_info(const char *username) {
     	int i;
     	char cleanup_command[256];
     	char output_filename[] = "lol.json";
-    	char api_key[] = "RGAPI-e063a979-d914-490f-965e-4ec648df1fe4";
+    	char api_key[] = "RGAPI-afbb0d43-00f5-43fd-9238-890e3c801fa8";
     
 	sprintf(curl_command,
         "curl -s \"https://kr.api.riotgames.com/lol/summoner/v3/summoners/by-name/%s/?api_key=%s\">%s",
