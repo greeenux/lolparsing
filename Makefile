@@ -28,11 +28,11 @@ test_file.o: $(TOPDIR)/main/main.c
 
 
 
-libparsing.a : compile $(OBJS)
+libparsing.a : compile
 	$(AR) $(AR_ADDING_FLAGS) $@ $(addprefix $(TOPDIR)/,$(addsuffix /libmy.a,$(SUBDIRS)))
 
-#in order to make we need OBJS => which are defined in Rules.mk and SUBDIRS's Makefile
-#libparsing.a파일을 만들기 위해서는 OBJS들이 필요한데 이것은 Rules.mk 파일에 정의 어떻게 얻을것인지 정의 되어있다.
+#in order to make we need compile => which are defined in Rules.mk and SUBDIRS's Makefile1
+#libparsing.a파일을 만들기 위해서는 compile result가 필요한데 이것은 Rules.mk 파일에 정의 어떻게 얻을것인지 정의 되어있다.
 #referring to Config.mk, ar -rvcT libparsing.a $(TOPDIR)/$(SUBDIRS)/libmy.a<which are from SUBDIRS's libmy.a>
 #Config.mk파일을 참조하면, ar -rvcT libparsing.a $(TOPDIR)/$(SUBDIRS)/libmy.a 각각의 SUBDIRS부터 온 libmy.a를 libparsing.a로
 
