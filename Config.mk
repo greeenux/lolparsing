@@ -1,5 +1,5 @@
 CC	:= gcc
-LD	:= ld
+MV	:= mv
 AR	:= ar
 INCLUDES	:= -I. -I$(TOPDIR)/include
 DEFINES	:= -DDEBUG
