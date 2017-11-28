@@ -41,8 +41,7 @@
 #undef malloc
 #undef free
 
-JSON_Malloc_Function parson_malloc = malloc;
-JSON_Free_Function parson_free = free;
+static JSON_Free_Function parson_free = free;
 JSON_Value * json_parse_file(const char *filename) {
     char *file_contents = read_file(filename);
     JSON_Value *output_value = NULL;
